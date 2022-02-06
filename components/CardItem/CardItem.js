@@ -1,22 +1,40 @@
 import React from 'react';
 import { Card } from 'react-bootstrap';
+import { useRouter } from "next/router";
 
-export default function CardItem({result}) {
-    const {name, birth_year, gender} = result;
+export default function CardItem({
+  name, 
+  birthYear, 
+  films, 
+  hairColor, 
+  height, 
+  mass,  
+  species, 
+  starship, 
+  }) {
+    
+  const router = useRouter();
   return (
     <>
-      <Card style={{ width: "18rem" }}>
+      <Card style={{ width: "18rem" }} onClick={() => {
+        router.push(`/character/${name}`);
+      }}>
       <Card.Img variant="top" src="" />
       <Card.Body>
-        <Card.Title>
-          <h3>Name: {name}</h3>
+          <Card.Title>
+          { name && <h3>Name: {name}</h3> }
         </Card.Title>
-        <Card.Text>
-          <p>DOB: {birth_year}</p>
-          <p>Gender: {gender}</p>
-        </Card.Text>
+        <div>
+          {birthYear && <p>DOB: {birthYear}</p> }
+          {films && <p>Films: {films}</p>}
+          {hairColor && <p>Hair Color: {hairColor}</p>}
+          {height && <p>Height: {height}</p>}
+          {mass && <p>Mass: {mass}</p>}
+          {species && <p>Species: {species}</p>}
+          {starship && <p>Startship: {starship}</p>}
+        </div>
       </Card.Body>
-    </Card>
+      </Card>
     </>
     );
 };

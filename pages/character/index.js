@@ -1,7 +1,8 @@
-import React, { useState, useEffect } from "react";
-import { Search } from "../../components/Search/Search";
+import React, { useState, useEffect, useRef } from "react";
+import CardItem from "../../components/CardItem/CardItem";
 import DefaultLayout from "../../layouts/Default";
-import CardList from "../../components/CardList/CardList";
+import uniqid from 'uniqid';
+
 
 const defaultEndpoint = `https://swapi.dev/api/people/`;
 
@@ -23,6 +24,9 @@ const Characters = ({ data }) => {
   });
   const [next, updateNext] = useState("");
   const { current } = page;
+
+  // Refs for submit input
+  const searchValue = useRef();
 
   useEffect(() => {
     async function request() {
@@ -60,18 +64,15 @@ const Characters = ({ data }) => {
     });
   }
 
+
   function handleOnSubmitSearch(e) {
     e.preventDefault();
 
-    const { currentTarget = {} } = e;
-    const fields = Array.from(currentTarget?.elements);
-    const fieldQuery = fields.find((field) => field.name === "query");
-
-    const value = fieldQuery.value || "";
-    const endpoint = `https://rickandmortyapi.com/api/character/?name=${value}`;
+    const inputValue = searchValue.current.value;
+    const endpoint = `${defaultEndpoint}?search=${inputValue}`;
 
     updatePage({
-      current: endpoint,
+      current: endpoint
     });
   }
 
@@ -80,11 +81,20 @@ const Characters = ({ data }) => {
       <DefaultLayout>
         <h1>Search For you favorite characters</h1>
         <form className="search" onSubmit={handleOnSubmitSearch}>
-          <input name="query" type="search" />
+          <input type="search" ref={searchValue}/>
           <button>Search</button>
         </form>
-        <CardList results={results}></CardList>
+        {
+          results.map((result) => {
+            let {name, birth_year} = result;
 
+            return (
+              <div key={uniqid()}>
+                <CardItem name={name} birthYear={birth_year} route={defaultEndpoint}></CardItem>
+              </div>
+            );
+          })
+        }
         {next && <button onClick={handleLoadMore}>Load More</button>}
       </DefaultLayout>
     </>
