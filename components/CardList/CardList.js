@@ -1,15 +1,15 @@
 import React from "react";
 import uniqid from "uniqid";
-import CharacterCard from "../CharacterCard/CharacterCard";
+import CardItem from "../CardItem/CardItem";
 
-export default function Cards({ results }) {
+export default function CardList({ results }) {
   return (
     <div>
       {results &&
         results.map((result) => {
           return (
             <div key={uniqid()}>
-              <CharacterCard result={result}></CharacterCard>
+              <CardItem result={result}></CardItem>
             </div>
           );
         })}

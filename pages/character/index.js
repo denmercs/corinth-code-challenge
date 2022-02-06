@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Search } from "../../components/Search/Search";
 import DefaultLayout from "../../layouts/Default";
-import Cards from "../../components/Cards/Cards";
+import CardList from "../../components/CardList/CardList";
 
 const defaultEndpoint = `https://swapi.dev/api/people/`;
 
@@ -83,7 +83,7 @@ const Characters = ({ data }) => {
           <input name="query" type="search" />
           <button>Search</button>
         </form>
-        <Cards results={results}></Cards>
+        <CardList results={results}></CardList>
 
         {next && <button onClick={handleLoadMore}>Load More</button>}
       </DefaultLayout>
