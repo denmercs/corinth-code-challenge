@@ -41,7 +41,6 @@ export default function CharacterCard({ result }) {
           <p>Startship: {starship}</p>
           <p>URL: {url}</p>
         </Card.Text>
-        <Button variant="primary">Go somewhere</Button>
       </Card.Body>
     </Card>
   );

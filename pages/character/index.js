@@ -60,11 +60,29 @@ const Characters = ({ data }) => {
     });
   }
 
+  function handleOnSubmitSearch(e) {
+    e.preventDefault();
+
+    const { currentTarget = {} } = e;
+    const fields = Array.from(currentTarget?.elements);
+    const fieldQuery = fields.find((field) => field.name === "query");
+
+    const value = fieldQuery.value || "";
+    const endpoint = `https://rickandmortyapi.com/api/character/?name=${value}`;
+
+    updatePage({
+      current: endpoint,
+    });
+  }
+
   return (
     <>
       <DefaultLayout>
         <h1>Search For you favorite characters</h1>
-        <Search></Search>
+        <form className="search" onSubmit={handleOnSubmitSearch}>
+          <input name="query" type="search" />
+          <button>Search</button>
+        </form>
         <Cards results={results}></Cards>
 
         {next && <button onClick={handleLoadMore}>Load More</button>}
