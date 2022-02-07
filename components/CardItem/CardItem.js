@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState, useEffect } from "react";
 import { Card } from "react-bootstrap";
 import { useRouter } from "next/router";
 import Species from "../../components/Species/Species";
@@ -15,6 +15,17 @@ export default function CardItem({
   starship,
 }) {
   const router = useRouter();
+  const [profile, setProfile] = useState();
+
+  const fetchSpeciesImage = async () => {
+    const response = await fetch(`/api/profiles/${name}`);
+    const data = await response.json();
+    console.log(data);
+};
+
+useEffect(() => {
+  fetchSpeciesImage();
+},[])
   
   return (
     <>
@@ -24,7 +35,7 @@ export default function CardItem({
           router.push(`/character/${name}`);
         }}
       >
-        <Card.Img variant="top" src="" />
+        {/* <Card.Img variant="top" src={} /> */}
         <Card.Body>
           <Card.Title>{name && <h3>Name: {name}</h3>}</Card.Title>
           <div>
