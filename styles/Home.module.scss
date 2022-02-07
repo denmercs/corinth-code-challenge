@@ -1,0 +1,48 @@
+.cards {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+}
+
+.loadmore {
+    display: flex;
+    justify-content: center;
+    margin: 2rem 0;
+    padding: 1rem 2rem;
+    background: transparent;
+}
+
+.card-item {
+    padding: 2rem;
+    margin: 1rem;
+
+    &:hover, &:focus {
+        cursor: pointer;
+        transform: scale(1.05) linear;
+    }
+
+}
+
+.characters {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: 2rem;
+}
+
+.character {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin-top: 2rem;
+}
+
+.search-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}

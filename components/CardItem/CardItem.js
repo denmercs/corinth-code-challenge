@@ -1,8 +1,9 @@
-import React, {useState, useEffect } from "react";
+import React from "react";
 import { Card } from "react-bootstrap";
 import { useRouter } from "next/router";
 import Species from "../../components/Species/Species";
 import Films from "../Films/Films";
+import styles from "../../styles/Home.module.scss";
 
 export default function CardItem({
   name,
@@ -15,49 +16,39 @@ export default function CardItem({
   starship,
 }) {
   const router = useRouter();
-  const [profile, setProfile] = useState();
 
-  const fetchSpeciesImage = async () => {
-    const response = await fetch(`/api/profiles/${name}`);
-    const data = await response.json();
-    console.log(data);
-};
-
-useEffect(() => {
-  fetchSpeciesImage();
-},[])
   
   return (
     <>
-      <Card
+        <Card
         style={{ width: "18rem" }}
         onClick={() => {
           router.push(`/character/${name}`);
         }}
+        className={styles['card-item']}
       >
-        {/* <Card.Img variant="top" src={} /> */}
         <Card.Body>
           <Card.Title>{name && <h3>Name: {name}</h3>}</Card.Title>
           <div>
             {
-              birthYear && <h4>DOB:<span>{birthYear}</span></h4>
+              birthYear && <h5>DOB:<span>{birthYear}</span></h5>
             }
             {
               films && <Films films={films}></Films>
             }
             {
-              hairColor && <h4>Hair Color:<span>{hairColor}</span></h4>
+              hairColor && <h5>Hair Color:<span>{hairColor}</span></h5>
             }
             {
-              height && <h4>Height:<span>{height}</span></h4>
+              height && <h5>Height:<span>{height}</span></h5>
             }
             {
-              mass && <h4>Mass:<span>{mass}</span></h4>
+              mass && <h5>Mass:<span>{mass}</span></h5>
             }
             {
               species && <Species species={species}></Species>
             }
-            {starship && <h4>Startship:<span>{starship}</span></h4>
+            {starship && <h5>Startship:<span>{starship}</span></h5>
             }
           </div>
         </Card.Body>

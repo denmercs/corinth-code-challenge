@@ -1,9 +1,6 @@
 import Head from "next/head";
-import Footer from "../components/Footer/Footer";
 import { Jumbotron } from "../components/Jumbotron/Jumbotron";
-import { Search } from "../components/Search/Search";
 import DefaultLayout from "../layouts/Default";
-import styles from "../styles/Home.module.scss";
 
 export default function Home() {
   return (
@@ -15,7 +12,6 @@ export default function Home() {
       </Head>
       <DefaultLayout>
         <Jumbotron></Jumbotron>
-        <Footer></Footer>
       </DefaultLayout>
     </>
   );

@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import CardItem from "../../components/CardItem/CardItem";
 import DefaultLayout from "../../layouts/Default";
+import styles from "../../styles/Home.module.scss";
+import Link from "next/link";
 
 export default function Character() {
   const router = useRouter();
@@ -37,6 +39,12 @@ export default function Character() {
 
   return (
     <DefaultLayout>
+      <div className={styles['character']}>
+        <Link href="/character">
+          <a role="button" type="button" className="btn btn-primary btn-lg">
+            Back
+          </a>
+        </Link>
       <CardItem
         name={name}
         height={height}
@@ -47,6 +55,7 @@ export default function Character() {
         species={species}
         starships={starships}
       ></CardItem>
+      </div>
     </DefaultLayout>
   );
 }

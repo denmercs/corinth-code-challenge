@@ -21,7 +21,7 @@ export default function Films({films}) {
 
   return (
     <div>
-        <h4>Films:</h4>
+        <h6>Films:</h6>
         {filmTitles && filmTitles.map(filmTitle => <p key={uniqid()}>{filmTitle.title}</p>)}
     </div>
   )

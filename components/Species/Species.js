@@ -28,7 +28,6 @@ export default function Species({ species }) {
     }
   }, [nameSpecies]);
 
-  // console.log(nameSpecies, imageFilePath);
 
   return (
     <>

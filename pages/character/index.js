@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import CardItem from "../../components/CardItem/CardItem";
 import DefaultLayout from "../../layouts/Default";
 import uniqid from "uniqid";
+import styles from "../../styles/Home.module.scss";
 
 const defaultEndpoint = `https://swapi.dev/api/people/`;
 
@@ -77,8 +78,9 @@ const Characters = ({ data }) => {
   return (
     <>
       <DefaultLayout>
+        <div className={styles['characters']}>
         <h1>Starwars Characters</h1>
-        <form className="search" onSubmit={handleOnSubmitSearch}>
+        <form className="search" className={styles['search-container']} onSubmit={handleOnSubmitSearch}>
           <div className="row mb-3">
             <label className="form-label">
               Search for your favorite character:
@@ -87,17 +89,18 @@ const Characters = ({ data }) => {
           </div>
           <button className="btn btn-primary">Search</button>
         </form>
+        <div className={styles['cards']}>
         {results.length !== 0 ? (
           results.map((result) => {
             let { name, birth_year } = result;
 
             return (
-              <div key={uniqid()}>
+              <div key={uniqid()} className={styles['cards']}>
                 <CardItem
                   name={name}
                   birthYear={birth_year}
                   route={defaultEndpoint}
-                ></CardItem>
+                  ></CardItem>
               </div>
             );
           })
@@ -106,7 +109,9 @@ const Characters = ({ data }) => {
             <p>Sorry, no data(s) found</p>
           </div>
         )}
-        {next && <button onClick={handleLoadMore}>Load More</button>}
+        </div>
+        {next && <button onClick={handleLoadMore} className={styles['loadmore']}>Load More</button>}
+        </div>
       </DefaultLayout>
     </>
   );
