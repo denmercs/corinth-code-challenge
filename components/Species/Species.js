@@ -1,37 +1,46 @@
 import React, { useState, useEffect } from "react";
-import TestImage from "../../assets/images/droid.jpg";
+import Image from "next/image";
+
 
 export default function Species({ species }) {
-  const [name, setName] = useState();
-  const [image, setImage] = useState();
+  const [nameSpecies, setNameSpecies] = useState();
+  const [imageFilePath, setImageFilePath] = useState();
 
   const fetchSpecies = async () => {
     const response = await fetch(species);
     const data = await response.json();
-    setName(data.name);
+    setNameSpecies(data.name)
   };
 
   const fetchSpeciesImage = async () => {
-    if (name) {
-      const response = await fetch(`/api/species/${name}`);
+      const response = await fetch(`/api/species/${nameSpecies}`);
       const data = await response.json();
-      setImage(data.imgSrc);
-    }
+      setImageFilePath(data.imgSrc);
   };
 
   useEffect(() => {
-    fetchSpecies();
-    fetchSpeciesImage();
-  }, [name]);
+    if(species.length !== 0) {
+      fetchSpecies();
+      fetchSpeciesImage();
+    } else {
+      setNameSpecies("human");
+      setImageFilePath("human.jpg")
+    }
+  }, [nameSpecies]);
 
-  // if (image) {
-  //   const imageUrl = require(image);
-  //   console.log(imageUrl);
-  // }
-  console.log(TestImage);
+  // console.log(nameSpecies, imageFilePath);
+
   return (
     <>
-      <img src={TestImage} />
+    {imageFilePath &&  (
+      <div>
+        <h4>Species Name: </h4><span>{nameSpecies ? nameSpecies : "Human"}</span>
+        {
+          species && <Image src={require('../../assets/images/' + imageFilePath)}></Image>
+        }
+        
+      </div>
+    )}
     </>
-  );
+  )
 }

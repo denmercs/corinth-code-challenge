@@ -19,14 +19,21 @@ export default function Character() {
   } = profile;
 
   const fetchProfile = async () => {
-    const response = await fetch(`https://swapi.dev/api/people/?search=${id}`);
+    const response = await fetch(`https://swapi.dev/api/people/?search=${id}`, {
+        headers : { 
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+         }
+      });
     const data = await response.json();
-    setProfile(data.results[0]);
+    
+    setProfile(...data.results);
   };
 
   useEffect(() => {
-    id ? fetchProfile() : "";
+      id && fetchProfile();
   }, [id]);
+
 
   return (
     <DefaultLayout>

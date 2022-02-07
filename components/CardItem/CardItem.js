@@ -2,6 +2,7 @@ import React from "react";
 import { Card } from "react-bootstrap";
 import { useRouter } from "next/router";
 import Species from "../../components/Species/Species";
+import Films from "../Films/Films";
 
 export default function CardItem({
   name,
@@ -14,6 +15,7 @@ export default function CardItem({
   starship,
 }) {
   const router = useRouter();
+  
   return (
     <>
       <Card
@@ -26,13 +28,26 @@ export default function CardItem({
         <Card.Body>
           <Card.Title>{name && <h3>Name: {name}</h3>}</Card.Title>
           <div>
-            {birthYear && <p>DOB: {birthYear}</p>}
-            {films && <p>Films: {films}</p>}
-            {hairColor && <p>Hair Color: {hairColor}</p>}
-            {height && <p>Height: {height}</p>}
-            {mass && <p>Mass: {mass}</p>}
-            {species && <Species species={species}></Species>}
-            {starship && <p>Startship: {starship}</p>}
+            {
+              birthYear && <h4>DOB:<span>{birthYear}</span></h4>
+            }
+            {
+              films && <Films films={films}></Films>
+            }
+            {
+              hairColor && <h4>Hair Color:<span>{hairColor}</span></h4>
+            }
+            {
+              height && <h4>Height:<span>{height}</span></h4>
+            }
+            {
+              mass && <h4>Mass:<span>{mass}</span></h4>
+            }
+            {
+              species && <Species species={species}></Species>
+            }
+            {starship && <h4>Startship:<span>{starship}</span></h4>
+            }
           </div>
         </Card.Body>
       </Card>
