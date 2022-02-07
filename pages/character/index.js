@@ -1,8 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import CardItem from "../../components/CardItem/CardItem";
 import DefaultLayout from "../../layouts/Default";
-import uniqid from 'uniqid';
-
+import uniqid from "uniqid";
 
 const defaultEndpoint = `https://swapi.dev/api/people/`;
 
@@ -64,7 +63,6 @@ const Characters = ({ data }) => {
     });
   }
 
-
   function handleOnSubmitSearch(e) {
     e.preventDefault();
 
@@ -72,29 +70,42 @@ const Characters = ({ data }) => {
     const endpoint = `${defaultEndpoint}?search=${inputValue}`;
 
     updatePage({
-      current: endpoint
+      current: endpoint,
     });
   }
 
   return (
     <>
       <DefaultLayout>
-        <h1>Search For you favorite characters</h1>
+        <h1>Starwars Characters</h1>
         <form className="search" onSubmit={handleOnSubmitSearch}>
-          <input type="search" ref={searchValue}/>
-          <button>Search</button>
+          <div className="row mb-3">
+            <label className="form-label">
+              Search for your favorite character:
+            </label>
+            <input className="form-control" type="search" ref={searchValue} />
+          </div>
+          <button className="btn btn-primary">Search</button>
         </form>
-        {
+        {results.length !== 0 ? (
           results.map((result) => {
-            let {name, birth_year} = result;
+            let { name, birth_year } = result;
 
             return (
               <div key={uniqid()}>
-                <CardItem name={name} birthYear={birth_year} route={defaultEndpoint}></CardItem>
+                <CardItem
+                  name={name}
+                  birthYear={birth_year}
+                  route={defaultEndpoint}
+                ></CardItem>
               </div>
             );
           })
-        }
+        ) : (
+          <div>
+            <p>Sorry, no data(s) found</p>
+          </div>
+        )}
         {next && <button onClick={handleLoadMore}>Load More</button>}
       </DefaultLayout>
     </>

@@ -1,3 +1,4 @@
+import Link from "next/link";
 import React from "react";
 
 export const Jumbotron = () => {
@@ -6,17 +7,16 @@ export const Jumbotron = () => {
       <div className="jumbotron container mt-4">
         <h1 className="display-4">Starwars Knowledge Base</h1>
         <p className="lead">
-          This is a simple hero unit, a simple jumbotron-style component for
-          calling extra attention to featured content or information.
+          This is LifeWay IT's code challenge given to full stack software
+          engineering candidates!
         </p>
-        <p>
-          It uses utility classNamees for typography and spacing to space
-          content out within the larger container.
-        </p>
+        <p>Now with The Force Awakens data!</p>
         <p className="lead">
-          <a className="btn btn-primary btn-lg" href="#" role="button">
-            Learn more
-          </a>
+          <Link href="/character">
+            <a role="button" type="button" className="btn btn-primary btn-lg">
+              Search by Character
+            </a>
+          </Link>
         </p>
       </div>
     </div>
