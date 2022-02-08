@@ -22,39 +22,38 @@ export default function Character() {
 
   const fetchProfile = async () => {
     const response = await fetch(`https://swapi.dev/api/people/?search=${id}`, {
-        headers : { 
-          'Content-Type': 'application/json',
-          'Accept': 'application/json'
-         }
-      });
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      },
+    });
     const data = await response.json();
-    
+
     setProfile(...data.results);
   };
 
   useEffect(() => {
-      id && fetchProfile();
+    id && fetchProfile();
   }, [id]);
-
 
   return (
     <DefaultLayout>
-      <div className={styles['character']}>
+      <div className={styles["character"]}>
         <Link href="/character">
           <a role="button" type="button" className="btn btn-primary btn-lg">
             Back
           </a>
         </Link>
-      <CardItem
-        name={name}
-        height={height}
-        birthYear={birth_year}
-        films={films}
-        hairColor={hair_color}
-        mass={mass}
-        species={species}
-        starships={starships}
-      ></CardItem>
+        <CardItem
+          name={name}
+          height={height}
+          birthYear={birth_year}
+          films={films}
+          hairColor={hair_color}
+          mass={mass}
+          species={species}
+          starships={starships}
+        ></CardItem>
       </div>
     </DefaultLayout>
   );

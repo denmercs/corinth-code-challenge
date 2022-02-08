@@ -78,39 +78,48 @@ const Characters = ({ data }) => {
   return (
     <>
       <DefaultLayout>
-        <div className={styles['characters']}>
-        <h1>Starwars Characters</h1>
-        <form className="search" className={styles['search-container']} onSubmit={handleOnSubmitSearch}>
-          <div className="row mb-3">
-            <label className="form-label">
-              Search for your favorite character:
-            </label>
-            <input className="form-control" type="search" ref={searchValue} />
-          </div>
-          <button className="btn btn-primary">Search</button>
-        </form>
-        <div className={styles['cards']}>
-        {results.length !== 0 ? (
-          results.map((result) => {
-            let { name, birth_year } = result;
+        <div className={styles["characters"]}>
+          <h1>Starwars Characters</h1>
+          <form
+            className="search"
+            className={styles["search-container"]}
+            onSubmit={handleOnSubmitSearch}
+          >
+            <div className="row mb-3">
+              <label className="form-label">
+                Search for your favorite character:
+              </label>
+              <input className="form-control" type="search" ref={searchValue} />
+            </div>
+            <button className="btn btn-primary">Search</button>
+          </form>
+          <div className={styles["cards"]}>
+            {results.length !== 0 ? (
+              results.map((result) => {
+                let { name, birth_year } = result;
 
-            return (
-              <div key={uniqid()} className={styles['cards']}>
-                <CardItem
-                  name={name}
-                  birthYear={birth_year}
-                  route={defaultEndpoint}
-                  ></CardItem>
+                return (
+                  <div key={uniqid()} className={styles["cards"]}>
+                    <CardItem
+                      name={name}
+                      birthYear={birth_year}
+                      route={defaultEndpoint}
+                      filePath={name.replace(/\s/g, "-")}
+                    ></CardItem>
+                  </div>
+                );
+              })
+            ) : (
+              <div>
+                <p>Sorry, no data(s) found</p>
               </div>
-            );
-          })
-        ) : (
-          <div>
-            <p>Sorry, no data(s) found</p>
+            )}
           </div>
-        )}
-        </div>
-        {next && <button onClick={handleLoadMore} className={styles['loadmore']}>Load More</button>}
+          {next && (
+            <button onClick={handleLoadMore} className={styles["loadmore"]}>
+              Load More
+            </button>
+          )}
         </div>
       </DefaultLayout>
     </>
