@@ -12,11 +12,11 @@ export default function Films({films}) {
     };
 
     useEffect(() => {
-        if(films.length !== 0) {
+       
             films.map(film => fetchFilms(film));
-        }
+       
         
-    },[])
+    },[films])
 
 
   return (

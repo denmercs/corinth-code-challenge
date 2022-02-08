@@ -16,7 +16,6 @@ export default function CardItem({
   starship,
 }) {
   const router = useRouter();
-
   
   return (
     <>
@@ -28,7 +27,7 @@ export default function CardItem({
         className={styles['card-item']}
       >
         <Card.Body>
-          <Card.Title>{name && <h3>Name: {name}</h3>}</Card.Title>
+          <Card.Title>{name && <h3>{name}</h3>}</Card.Title>
           <div>
             {
               birthYear && <h5>DOB:<span>{birthYear}</span></h5>
@@ -48,7 +47,7 @@ export default function CardItem({
             {
               species && <Species species={species}></Species>
             }
-            {starship && <h5>Startship:<span>{starship}</span></h5>
+            {starship && <h5>Starship:<span>{starship}</span></h5>
             }
           </div>
         </Card.Body>
